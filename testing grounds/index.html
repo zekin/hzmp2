@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <title>hzmp2 testing grounds</title>
+    <style type="text/css">
+        body {
+            padding: 0px;
+            margin: 0px;
+            overflow: hidden;
+        }
+       
+    </style> 
+</head>    
+<body>
+    <script type="text/javascript" src="../libs/pixi.js"></script>
+    <script type="text/javascript" src="../js/util.js"></script>
+    <script type="text/javascript" src="../js/ui/menuselect.js"></script>
+    <script>
+        var renderer = new PIXI.autoDetectRenderer(540, 380, {backgroundColor : 0x22222F});
+        document.body.appendChild(renderer.view);
+        
+        var m = new MenuSelect({
+            items: ['Whistle Round the World', 'Mom\'s Spaghetti', 'Lazaretto'],
+            x: 100,
+            y: 100
+        });
+        m.initialize();
+        
+        var stage = new PIXI.Container();
+        stage.addChild(m.container);
+        
+        function mainLoop(){
+            renderer.render(stage);
+            requestAnimationFrame(mainLoop);
+        }
+        
+        mainLoop();
+        window.onkeydown = m.handleInput.bind(m);
+        window.onkeyup = m.handleInput.bind(m);
+        window.onkeypress = m.handleInput.bind(m);
+    </script>
+</body>
+</html>
